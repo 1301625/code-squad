@@ -6,7 +6,7 @@
 
 1. 메인.swift 에서  단어 , 정수 , L or R 을 입력 받고 구조체인 `PushWord` 에  입력한 값을 지정
 2. `PushWord` 의 메서드인 `process()` 함수를 호출하고 먼저 `countCheck()`  메서드를 통해 정수값이 범위에 속해 있는지 확인 후 `false` 라면   return
-3. `minCountProcess()` 메서드에서 음수라면   `countAbsChange()`  통해   `count`  양수로 변경 ,  `controlChange()`  L 이라면 -> R ,  R 이라면 -> L  로 `control`  값을 변경
+3. `minCountProcess()` 메서드에서 음수라면 `count`  양수로 변경 ,  `controlChange()`  L 이라면 -> R ,  R 이라면 -> L  로 `control`  값을 변경
 4. 현재 `control`  값을 통해 `leftPush`   또는 `rightPush`  메서드 호출  후 결과물 출력
 
 #### 코드
@@ -14,11 +14,8 @@
 - 구조체 정의
 
 ```swift
-enum control : String {
-    case l
-    case r
-    case L
-    case R
+enum Control : String {
+    case l,r,L,R
 }
 
 struct PushWord {
@@ -37,29 +34,24 @@ struct PushWord {
 
 ```swift
 mutating func countCheck() -> Bool {
-        return self.count < 100 && self.count >= -100 ? true : false
+        return count < 100 && count >= -100 ? true : false
 }
 
 mutating func minCountProcess() {
         if self.count < 0 {
-            countAbsChange()
+            count = -count
             controlChange()
         }
 }
     
-mutating func countAbsChange() {
-      	self.count = -(self.count)
-}
-    
 mutating func controlChange() {
-        if self.control != nil {
-            self.control = self.control == .R || self.control == .r ? .L : .R
+        if control != nil {
+            control = control == .R || control == .r ? .L : .R
         }
 }
 
 mutating func process() {
-        if !countCheck() {
-            print("숫자 범위를 벗어났습니다")
+        if !countCheck() { print("숫자 범위를 벗어났습니다")
             return }
         
         minCountProcess()
@@ -75,35 +67,26 @@ mutating func process() {
 - 단어 이동
 
 ```swift
- mutating func leftPush(count : Int) {
+    mutating func leftPush(count : Int) {
         let index = count % word.count
-        wordMove(index: index)
-    }
-    mutating func rightPush(count : Int) {
-        let index = word.count - (count % word.count)
-        wordMove(index: index)
+        word = word[index..<word.count] + word[0..<index]
     }
     
-    mutating func wordMove(index : Int) {
-        self.word = word[index..<word.count] + word[0..<index]
-  	}
+    mutating func rightPush(count : Int) {
+        let index = word.count - (count % word.count)
+        word = word[index..<word.count] + word[0..<index]
+    }
 
-mutating func process() {
-        
+    mutating func process() {
         switch control {
         case .L , .l :
             leftPush(count: count)
-            printWord()
         case .R , .r :
             rightPush(count: count)
-            printWord()
         default:
             print("방향을 잘못 입력했습니다")
         }
-    }
-    
-    func printWord() {
-        print(self.word)
+        print(word)
     }
 
 
@@ -120,5 +103,5 @@ switch문 통해 control 값에 따라 `leftPush` or `rightPush`  호출
 
 extension string을 사용하였다 
 
-이유는 String에서는  Array 에서 사용 가능한  `..<` subscript가 없으므로  String 값이 내가 원하는 만큼 출력할 수 있도록 subscript 를 구현했다.
+이유는 String에서는  Array 에서 사용 가능한  `..<` subscript가 없으므로  String 값이 내가 원하는 만큼 출력할 수 있도록 subscript 를 구현했습니다.
 
