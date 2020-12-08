@@ -23,8 +23,6 @@ while true {
                                 count: Int(input[1]) ?? 0 ,
                                 control: Control(rawValue: input[2]))
         pushword.process()
-       
-       
     case 9 :
         print("종료")
         exit(0)
