@@ -46,15 +46,10 @@ struct Cube {
         return Array(piece[index..<piece.count] + piece[0..<index])
     }
     
-    mutating func upPush(column : Int){
+    mutating func upDownPush(column : Int, action : Action){
         var cubeArray = flatColumn(column)
-        cubeArray = leftPush(cube: cubeArray)
-        replaceCube(temp: cubeArray, column)
-    }
-    
-    mutating func downPush(column : Int){
-        var cubeArray = flatColumn(column)
-        cubeArray = rightPush(cube: cubeArray)
+        cubeArray = action == .R || action == .Lsquoted ?
+            leftPush(cube: cubeArray) : rightPush(cube: cubeArray)
         replaceCube(temp: cubeArray, column)
     }
     
@@ -80,17 +75,17 @@ struct Cube {
             case .U:
                 cube[0] = leftPush(cube: cube[0])
             case .R:
-                upPush(column : 2)
+                upDownPush(column : 2, action: .R)
             case .L:
-                downPush(column: 0)
+                upDownPush(column: 0,action: .L)
             case .B:
                 cube[2] = rightPush(cube: cube[2])
             case .Usquoted:
                 cube[0] = rightPush(cube: cube[0])
             case .Rsquotud:
-                downPush(column: 2)
+                upDownPush(column: 2, action: .Rsquotud)
             case .Lsquoted:
-                upPush(column: 0)
+                upDownPush(column: 0, action: .Lsquoted)
             case .Bsquoted:
                 cube[2] = leftPush(cube: cube[2])
             }
