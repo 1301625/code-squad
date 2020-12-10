@@ -9,3 +9,7 @@ import Foundation
 
 var cube = RubiksCube()
 cube.cubePrint()
+
+cube.F()
+
+cube.cubePrint()

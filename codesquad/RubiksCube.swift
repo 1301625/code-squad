@@ -42,7 +42,39 @@ struct RubiksCube {
     }
     
     
+    mutating func F() {
+        let tmp = cube[0][2] // 블루 색상 임시 보관
+        let getW = flatColumn(1, 2) // 흰색값 가져옴
+        let getR = cube[5][0] // 빨강색 가져옴
+        let getG = flatColumn(3, 0) // 초록색 가져오고
+        replaceHorizontalCube(changeCube: getW, cubeNumber: 0, row: 2) //블루 2 -> 흰색으로 변경
+        replaceVerticalCube(changeCube: getR, cubeNumber: 1, column: 2) //흰색에서 빨강으로 변경
+        replaceHorizontalCube(changeCube: getG, cubeNumber: 5, row: 0) // 빨강에서 초록으로 변경
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 3, column: 0) // 초록에서 파랑으로 변경
+    }
     
+    
+    
+    //MARK: 큐브 변경
+    mutating func replaceVerticalCube(changeCube : [String] , cubeNumber : Int ,column : Int) {
+        for i in 0...2 {
+            cube[cubeNumber][i][column] = changeCube[i]
+        }
+    }
+
+    mutating func replaceHorizontalCube(changeCube : [String] , cubeNumber : Int ,row : Int) {
+        cube[cubeNumber][row] = changeCube
+       
+    }
+    
+    //MARK: 세로큐브 가로 변환
+    func flatColumn(_ location : Int, _ column : Int) -> [String] {
+        var change = [String]()
+        for i in 0...2 {
+            change.append(cube[location][i][column])
+        }
+        return change
+    }
     
     //MARK: 출력 부분
     func cubePrint() {
