@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFA4CA342581FBFD003F98CE /* RubiksCube.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4CA332581FBFD003F98CE /* RubiksCube.swift */; };
 		BFAEC292257DB85200329F0A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAEC291257DB85200329F0A /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BFA4CA332581FBFD003F98CE /* RubiksCube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RubiksCube.swift; sourceTree = "<group>"; };
 		BFAEC28E257DB85200329F0A /* codesquad */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = codesquad; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAEC291257DB85200329F0A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				BFAEC291257DB85200329F0A /* main.swift */,
+				BFA4CA332581FBFD003F98CE /* RubiksCube.swift */,
 			);
 			path = codesquad;
 			sourceTree = "<group>";
@@ -119,6 +122,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA4CA342581FBFD003F98CE /* RubiksCube.swift in Sources */,
 				BFAEC292257DB85200329F0A /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
