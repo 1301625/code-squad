@@ -29,28 +29,113 @@ enum Color : String {
 }
 
 struct RubiksCube {
-    var cube : [[[String]]]
+    var rubikCube : [[[String]]]
     
     init(){
-        cube = Array(repeating: Array(repeating: Array(repeating: "", count: 3), count: 3), count: 6)
+        rubikCube = Array(repeating: Array(repeating: Array(repeating: "", count: 3), count: 3), count: 6)
         
         for i in 0...5 {
             for j in 0...2 {
-                cube[i][j] = Array(repeating: Color.init(num: i).rawValue, count: 3)
+                rubikCube[i][j] = Array(repeating: Color.init(num: i).rawValue, count: 3)
             }
         }
     }
     
-    
+    //MARK: 큐브 동작
     mutating func F() {
-        let tmp = cube[0][2] // 블루 색상 임시 보관
-        let getW = flatColumn(1, 2) // 흰색값 가져옴
-        let getR = cube[5][0] // 빨강색 가져옴
-        let getG = flatColumn(3, 0) // 초록색 가져오고
-        replaceHorizontalCube(changeCube: getW, cubeNumber: 0, row: 2) //블루 2 -> 흰색으로 변경
-        replaceVerticalCube(changeCube: getR, cubeNumber: 1, column: 2) //흰색에서 빨강으로 변경
-        replaceHorizontalCube(changeCube: getG, cubeNumber: 5, row: 0) // 빨강에서 초록으로 변경
+        let tmp = rubikCube[0][2] // 블루 색상 임시 보관
+        replaceHorizontalCube(changeCube: flatColumn(1, 2), cubeNumber: 0, row: 2) //블루에서 흰색으로 변경
+        replaceVerticalCube(changeCube: rubikCube[5][0], cubeNumber: 1, column: 2) //흰색에서 빨강으로 변경
+        replaceHorizontalCube(changeCube: flatColumn(3, 0), cubeNumber: 5, row: 0) // 빨강에서 초록으로 변경
         replaceVerticalCube(changeCube: tmp, cubeNumber: 3, column: 0) // 초록에서 파랑으로 변경
+    }
+
+    mutating func Fsquotud() {
+        let tmp = rubikCube[0][2] // 블루 색상 임시 보관
+        replaceVerticalCube(changeCube: flatColumn(3, 0), cubeNumber: 0, column: 2) // 블루에서 초록으로 변경
+        replaceHorizontalCube(changeCube: rubikCube[5][0], cubeNumber: 3, row: 0) // 초록에서 빨강으로 변경
+        replaceVerticalCube(changeCube: flatColumn(1, 2), cubeNumber: 5, column: 0) // 빨강에서 흰색으로 변경
+        replaceHorizontalCube(changeCube: tmp, cubeNumber: 1, row: 2) //흰색 -> 블루으로 변경
+    }
+
+    mutating func R() {
+        let tmp = flatColumn(0, 2) // 블루 색상 임시 보관
+        replaceVerticalCube(changeCube: flatColumn(2, 2), cubeNumber: 0, column: 2) //블루에서 주황으로 변경
+        replaceVerticalCube(changeCube: flatColumn(5, 2), cubeNumber: 2, column: 2) //주황에서 빨강으로 변경
+        replaceVerticalCube(changeCube: flatColumn(4, 0), cubeNumber: 5, column: 2) // 빨강에서 노랑으로 변경
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 4, column: 0) // 노랑에서 파랑으로 변경
+    }
+
+    mutating func Rsquoted() {
+        let tmp = flatColumn(0, 2) // 블루 색상 임시 보관
+        replaceVerticalCube(changeCube: flatColumn(4, 0), cubeNumber: 0, column: 2) //블루에서 노랑으로 변경
+        replaceVerticalCube(changeCube: flatColumn(5, 2), cubeNumber: 4, column: 0) //노랑에서 빨강으로 변경
+        replaceVerticalCube(changeCube: flatColumn(2, 2), cubeNumber: 5, column: 2) // 빨강에서 주황으로 변경
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 2, column: 2) // 주황에서 파랑으로 변경
+    }
+
+    mutating func U() {
+        let tmp = rubikCube[1][0] // 흰색 임시보관
+        replaceHorizontalCube(changeCube: rubikCube[2][0], cubeNumber: 1, row: 0) // 흰색에서 주황
+        replaceHorizontalCube(changeCube: rubikCube[3][0], cubeNumber: 2, row: 0) // 주황에서 초록
+        replaceHorizontalCube(changeCube: rubikCube[4][0], cubeNumber: 3, row: 0) // 초록에서 노랑
+        replaceHorizontalCube(changeCube: tmp, cubeNumber: 4, row: 0) // 노랑에서 흰색
+    }
+
+    mutating func Usquoted() {
+        let tmp = rubikCube[1][0] // 흰색 임시보관
+        replaceHorizontalCube(changeCube: rubikCube[4][0], cubeNumber: 1, row: 0) // 흰색에서 노랑
+        replaceHorizontalCube(changeCube: rubikCube[3][0], cubeNumber: 4, row: 0) // 노랑에서 초록
+        replaceHorizontalCube(changeCube: rubikCube[2][0], cubeNumber: 3, row: 0) // 초록에서 주황
+        replaceHorizontalCube(changeCube: tmp, cubeNumber: 2, row: 0) // 주황에서 흰색
+    }
+
+    mutating func B() {
+        let tmp = rubikCube[0][0]
+        replaceHorizontalCube(changeCube: flatColumn(3, 2), cubeNumber: 0, row: 0) // 파랑에서 초록
+        replaceVerticalCube(changeCube: rubikCube[5][2], cubeNumber: 3, column: 2) // 초록에서 빨강
+        replaceHorizontalCube(changeCube: flatColumn(1, 0), cubeNumber: 5, row: 2) // 빨강에서 흰색
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 1, column: 0) // 흰색에서 파랑
+    }
+
+    mutating func Bsquoted() {
+        let tmp = rubikCube[0][0]
+        replaceHorizontalCube(changeCube: flatColumn(1, 0), cubeNumber: 0, row: 0) // 파랑에서 흰색
+        replaceVerticalCube(changeCube: rubikCube[5][2], cubeNumber: 1, column: 0) // 흰색에서 빨강
+        replaceHorizontalCube(changeCube: flatColumn(3, 2), cubeNumber: 5, row: 2) // 빨강에서 초록
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 3, column: 2) // 초록에서 파랑
+    }
+
+    mutating func L() {
+        let tmp = flatColumn(0, 0)
+        replaceVerticalCube(changeCube: flatColumn(4, 2), cubeNumber: 0, column: 0) // 파랑에서 노랑
+        replaceVerticalCube(changeCube: flatColumn(5, 0), cubeNumber: 4, column: 2) // 노랑에서 빨강
+        replaceVerticalCube(changeCube: flatColumn(2, 0), cubeNumber: 5, column: 0) // 빨강에서 주황
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 2, column: 0) // 주황에서 파랑
+    }
+
+    mutating func Lsquoted() {
+        let tmp = flatColumn(0, 0)
+        replaceVerticalCube(changeCube: flatColumn(2, 0), cubeNumber: 0, column: 0) // 파랑에서 주황
+        replaceVerticalCube(changeCube: flatColumn(5, 0), cubeNumber: 2, column: 0) // 주황에서 삘강
+        replaceVerticalCube(changeCube: flatColumn(4, 2), cubeNumber: 5, column: 0) // 빨강에서 노랑
+        replaceVerticalCube(changeCube: tmp, cubeNumber: 4, column: 2) // 노랑에서 파랑
+    }
+
+    mutating func D() {
+        let tmp = rubikCube[1][2] // 흰색 임시보관
+        replaceHorizontalCube(changeCube: rubikCube[4][2], cubeNumber: 1, row: 2) // 흰색에서 노랑
+        replaceHorizontalCube(changeCube: rubikCube[3][2], cubeNumber: 4, row: 2) // 노랑에서 초록
+        replaceHorizontalCube(changeCube: rubikCube[2][2], cubeNumber: 3, row: 2) // 초록에서 주황
+        replaceHorizontalCube(changeCube: tmp, cubeNumber: 2, row: 2) // 주황에서 흰색
+    }
+
+    mutating func Dsquoted() {
+        let tmp = rubikCube[1][2]
+        replaceHorizontalCube(changeCube: rubikCube[2][2], cubeNumber: 1, row: 2) // 흰색에서 주황
+        replaceHorizontalCube(changeCube: rubikCube[3][2], cubeNumber: 2, row: 2) // 주황에서 초록
+        replaceHorizontalCube(changeCube: rubikCube[4][2], cubeNumber: 3, row: 2) // 초록에서 노랑
+        replaceHorizontalCube(changeCube: tmp, cubeNumber: 4, row: 2) // 노랑에서 흰색
     }
     
     
@@ -58,12 +143,12 @@ struct RubiksCube {
     //MARK: 큐브 변경
     mutating func replaceVerticalCube(changeCube : [String] , cubeNumber : Int ,column : Int) {
         for i in 0...2 {
-            cube[cubeNumber][i][column] = changeCube[i]
+            rubikCube[cubeNumber][i][column] = changeCube[i]
         }
     }
 
     mutating func replaceHorizontalCube(changeCube : [String] , cubeNumber : Int ,row : Int) {
-        cube[cubeNumber][row] = changeCube
+        rubikCube[cubeNumber][row] = changeCube
        
     }
     
@@ -71,7 +156,7 @@ struct RubiksCube {
     func flatColumn(_ location : Int, _ column : Int) -> [String] {
         var change = [String]()
         for i in 0...2 {
-            change.append(cube[location][i][column])
+            change.append(rubikCube[location][i][column])
         }
         return change
     }
@@ -90,7 +175,7 @@ struct RubiksCube {
         for j in 0...2 {
             print("\t\t\t\t ", separator : "" , terminator: "")
             for k in 0...2 {
-                print(cube[side][j][k], separator: "" , terminator: " ")
+                print(rubikCube[side][j][k], separator: "" , terminator: " ")
             }
             print()
         }
@@ -100,7 +185,7 @@ struct RubiksCube {
     func middleCubePrint(floor : Int) {
         for i in 1...4 {
             for k in 0...2 {
-                print(cube[i][floor][k], separator : "" , terminator: " ")
+                print(rubikCube[i][floor][k], separator : "" , terminator: " ")
             }
             print("\t   ", separator : "" , terminator: "")
         }
