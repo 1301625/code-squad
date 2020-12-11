@@ -7,6 +7,8 @@
 
 import Foundation
 
+let startTime = CFAbsoluteTimeGetCurrent()
+
 var cube = RubiksCube()
 cube.cubePrint()
 
@@ -18,6 +20,8 @@ while true {
     let input = readLine() ?? ""
     
     if input == "Q" || input == "q" {
+        let endTime = CFAbsoluteTimeGetCurrent() - startTime
+        totalTime(time: Int(endTime))
         print("조각갯수: \(actionCount)")
         print("이용해주셔서 감사합니다")
         break
@@ -45,5 +49,8 @@ func inputConvert(input : [String]) -> [Action] {
     return tempArr.compactMap { Action(rawValue: $0) }
 }
 
-
-//cube.cubePrint()
+func totalTime(time : Int) {
+    let min : String = { time / 60 < 10 ? "0\(time / 60)" : "\(time / 60)" }()
+    let second : String = { time % 60 < 10 ? "0\(time % 60)" : "\(time % 60)" }()
+    print("경과시간: \(min):\(second)" )
+}
