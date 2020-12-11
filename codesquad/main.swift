@@ -10,6 +10,15 @@ import Foundation
 var cube = RubiksCube()
 cube.cubePrint()
 
-cube.F()
+//test
+cube.B()
+cube.Dsquoted()
+cube.Fsquoted()
+cube.U()
+cube.L()
+cube.L()
+cube.Lsquoted()
+cube.R()
+cube.D()
 
 cube.cubePrint()
