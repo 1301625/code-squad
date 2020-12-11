@@ -25,7 +25,37 @@ struct RubiksCube {
     
     //MARK: 실행
     mutating func process(input : [Action]) {
-        
+        print()
+        input.forEach { (action) in
+            print(action.toString())
+            switch action {
+            case .U:
+                U()
+            case .L:
+                L()
+            case .F:
+                F()
+            case .R:
+                R()
+            case .B:
+                B()
+            case .D:
+                D()
+            case .Usquoted:
+                Usquoted()
+            case .Lsquoted:
+                Lsquoted()
+            case .Fsquoted:
+                Fsquoted()
+            case .Rsquoted:
+                Rsquoted()
+            case .Bsquoted:
+                Bsquoted()
+            case .Dsquoted:
+                Dsquoted()
+            }
+            cubePrint()
+        }
     }
     
     //MARK: 큐브 동작
