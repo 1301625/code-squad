@@ -7,26 +7,6 @@
 
 import Foundation
 
-enum Color : String {
-    case B,W,O,G,Y,R
-    
-    init(num : Int) {
-        switch num {
-        case 0:
-            self = .B
-        case 1:
-            self = .W
-        case 2:
-            self = .O
-        case 3:
-            self = .G
-        case 4:
-            self = .Y
-        default:
-            self = .R
-        }
-    }
-}
 
 struct RubiksCube {
     var rubikCube : [[[String]]]
@@ -40,6 +20,12 @@ struct RubiksCube {
                 rubikCube[i][j] = Array(repeating: Color.init(num: i).rawValue, count: 3)
             }
         }
+    }
+    
+    
+    //MARK: 실행
+    mutating func process(input : [Action]) {
+        
     }
     
     //MARK: 큐브 동작
