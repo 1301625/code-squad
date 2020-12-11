@@ -50,7 +50,7 @@ struct RubiksCube {
         replaceVerticalCube(changeCube: tmp, cubeNumber: 3, column: 0) // 초록에서 파랑으로 변경
     }
 
-    mutating func Fsquotud() {
+    mutating func Fsquoted() {
         let tmp = rubikCube[0][2] // 블루 색상 임시 보관
         replaceVerticalCube(changeCube: flatColumn(3, 0), cubeNumber: 0, column: 2) // 블루에서 초록으로 변경
         replaceHorizontalCube(changeCube: rubikCube[5][0], cubeNumber: 3, row: 0) // 초록에서 빨강으로 변경
@@ -138,6 +138,36 @@ struct RubiksCube {
         replaceHorizontalCube(changeCube: tmp, cubeNumber: 4, row: 2) // 노랑에서 흰색
     }
     
+    
+    //MARK: 큐브 회전(시계방향, 반시계방향)
+    mutating func rotationRight(cubeNumber : Int) {
+        var tmp = Array(repeating: Array(repeating: "", count: 3), count: 3)
+        for i in 0...2 {
+            tmp[i] = rubikCube[cubeNumber][i]
+        }
+        var j = 0
+        for i in stride(from: 2, through: 0, by: -1) {
+            replaceCube(temp: tmp[j], location: cubeNumber, column: i)
+            j += 1
+        }
+    }
+    mutating func rotationLeft(cubeNumber : Int) {
+        var tmp = Array(repeating: Array(repeating: "", count: 3), count: 3)
+        for i in 0...2 {
+            tmp[i] = rubikCube[cubeNumber][i]
+        }
+        
+        for i in 0...2 {
+            replaceCube(temp: tmp[i].reversed(), location: cubeNumber, column: i)
+        }
+    }
+    
+    //MARK: 큐브 변경
+    mutating func replaceCube(temp : [String] ,location : Int,  column : Int) {
+        for i in 0...2 {
+            rubikCube[location][i][column] = temp[i]
+        }
+    }
     
     
     //MARK: 큐브 변경
