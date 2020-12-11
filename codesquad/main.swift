@@ -10,6 +10,7 @@ import Foundation
 var cube = RubiksCube()
 cube.cubePrint()
 
+var actionCount = 0
 
 while true {
     
@@ -17,7 +18,8 @@ while true {
     let input = readLine() ?? ""
     
     if input == "Q" || input == "q" {
-        print("Bye~")
+        print("조각갯수: \(actionCount)")
+        print("이용해주셔서 감사합니다")
         break
     }
     cubeAction(input : input)
@@ -25,6 +27,7 @@ while true {
 
 func cubeAction(input : String) {
     let actionText = inputConvert(input : input.map { String($0) })
+    actionCount = actionText.count
     cube.process(input: actionText)
 }
 
