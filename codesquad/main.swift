@@ -14,8 +14,9 @@ cube.cubePrint()
 
 var actionCount = 0
 
+print("큐브섞기 CUBE> S")
+
 while true {
-    
     print("CUBE> ", separator: "", terminator: "")
     let input = readLine() ?? ""
     
@@ -26,6 +27,11 @@ while true {
         print("이용해주셔서 감사합니다")
         break
     }
+    
+    else if input == "S" || input == "s" {
+        cube.process(input: cubeShuffle())
+    }
+    
     cubeAction(input : input)
 }
 
@@ -53,4 +59,16 @@ func totalTime(time : Int) {
     let min : String = { time / 60 < 10 ? "0\(time / 60)" : "\(time / 60)" }()
     let second : String = { time % 60 < 10 ? "0\(time % 60)" : "\(time % 60)" }()
     print("경과시간: \(min):\(second)" )
+}
+
+
+
+func cubeShuffle() -> [Action] {
+    let action : [Action] = [.F, .Fsquoted, .R, .Rsquoted, .U, .Usquoted,
+                             .B, .Bsquoted, .L, .Lsquoted, .D, .Dsquoted]
+    var shuffleAction : [Action] = []
+    for _ in 0...8 {
+        shuffleAction.append(action[Int.random(in: 0...11)])
+    }
+    return shuffleAction
 }
