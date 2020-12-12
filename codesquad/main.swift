@@ -18,7 +18,7 @@ print(" - 큐브섞기 'CUBE> S'")
 
 while true {
     print("CUBE> ", separator: "", terminator: "")
-    let input = readLine() ?? ""
+    let input = readLine() ?? ""   // 입력값 F R R' U2 R
         
     if input == "Q" || input == "q" {
         cubeEnd()
@@ -49,7 +49,7 @@ func inputConvert(input : [String]) -> [Action] {
         if input[i] == "'" {
             tempArr[tempArr.count-1] += "'"
         } else if input[i] == "2" {
-            tempArr.append(input[i+1])
+            tempArr.append(input[i-1])
         } else {
             tempArr.append(input[i])
         }
