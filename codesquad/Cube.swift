@@ -10,7 +10,7 @@ import Foundation
 enum Action : String {
     case U, R, L, B
     case Usquoted = "U'"
-    case Rsquotud = "R'"
+    case Rsquoted = "R'"
     case Lsquoted = "L'"
     case Bsquoted = "B'"
     
@@ -19,7 +19,7 @@ enum Action : String {
         case .Bsquoted : return "B'"
         case .Lsquoted : return "L'"
         case .Usquoted : return "U'"
-        case .Rsquotud : return "R'"
+        case .Rsquoted : return "R'"
         default:
             return self.rawValue
         }
@@ -82,8 +82,8 @@ struct Cube {
                 cube[2] = rightPush(cube: cube[2])
             case .Usquoted:
                 cube[0] = rightPush(cube: cube[0])
-            case .Rsquotud:
-                upDownPush(column: 2, action: .Rsquotud)
+            case .Rsquoted:
+                upDownPush(column: 2, action: .Rsquoted)
             case .Lsquoted:
                 upDownPush(column: 0, action: .Lsquoted)
             case .Bsquoted:
