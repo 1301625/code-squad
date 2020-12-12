@@ -10,6 +10,7 @@ import Foundation
 
 struct RubiksCube {
     var rubikCube : [[[String]]]
+    let completeCube : [[[String]]]
     
     //MARK: 큐브생성
     init(){
@@ -20,6 +21,7 @@ struct RubiksCube {
                 rubikCube[i][j] = Array(repeating: Color.init(num: i).rawValue, count: 3)
             }
         }
+        completeCube = rubikCube
     }
     
     
@@ -251,6 +253,11 @@ struct RubiksCube {
             print("\t   ", separator : "" , terminator: "")
         }
         print()
+    }
+    
+    //MARK: 큐브완성 비교
+    func completeCubeCheck() -> Bool {
+        return completeCube == rubikCube
     }
 }
 

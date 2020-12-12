@@ -14,17 +14,14 @@ cube.cubePrint()
 
 var actionCount = 0
 
-print("큐브섞기 CUBE> S")
+print(" - 큐브섞기 'CUBE> S'")
 
 while true {
     print("CUBE> ", separator: "", terminator: "")
     let input = readLine() ?? ""
-    
+        
     if input == "Q" || input == "q" {
-        let endTime = CFAbsoluteTimeGetCurrent() - startTime
-        totalTime(time: Int(endTime))
-        print("조각갯수: \(actionCount)")
-        print("이용해주셔서 감사합니다")
+        cubeEnd()
         break
     }
     
@@ -33,11 +30,16 @@ while true {
     }
     
     cubeAction(input : input)
+    
+    if cube.completeCubeCheck() {
+        print("모든면을 맞추셨습니다 축하합니다")
+        break
+    }
 }
 
 func cubeAction(input : String) {
     let actionText = inputConvert(input : input.map { String($0) })
-    actionCount = actionText.count
+    actionCount += actionText.count
     cube.process(input: actionText)
 }
 
@@ -71,4 +73,11 @@ func cubeShuffle() -> [Action] {
         shuffleAction.append(action[Int.random(in: 0...11)])
     }
     return shuffleAction
+}
+
+func cubeEnd() {
+    let endTime = CFAbsoluteTimeGetCurrent() - startTime
+    totalTime(time: Int(endTime))
+    print("조각갯수: \(actionCount)")
+    print("이용해주셔서 감사합니다. 뚜뚜뚜.")
 }
