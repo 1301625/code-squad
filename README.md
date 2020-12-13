@@ -264,20 +264,7 @@ mutating func process(input : [Action]) {
 
 `rotationLeft`  - 움직일 큐브 면을 임시배열에 저장 , 저장한 임시배열을 반대로 바꿔  `replaceCube`함수에 매개변수로 넣어 전달 차례대로 현재 큐브면에 세로값에 변경 
 
-ex - 현재   B B C        CBB 변경하여  `replaceCube` 에 전달    C    으로 큐브변경   
-
-​				B B C            															 B 
-
-​				B B C 																		B 
-
 `rotationRight` - 움직일 큐브 면을 임시배열에 저장, 저장한 임시배열을 차례대로 진행되어야하고 반복은 반대로 큐브의 오른쪽부터 진행 되어야 했다
-
-ex - 현재  B B C        BBC 변경하여  `replaceCube` 에 전달    B    으로 큐브변경   
-
-​				B B C            															B 
-
-​				B B C 																	   C 
-
 
 
 큐브기호동작  12가지 -  tmp 임시로 움직이는 큐브 한 위치를 저장한 후 
